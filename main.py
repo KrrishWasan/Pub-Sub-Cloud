@@ -1,4 +1,3 @@
-import base64
 import json
 from google.cloud import pubsub_v1
 
@@ -14,13 +13,15 @@ def get_file_metadata(event, context):
             'size': event.get('size', 'Unknown')
         }
 
-        print("File metadata:", file_data)  # 👈 Add logging here
+        print("📦 File metadata:", file_data)
 
         message_json = json.dumps(file_data)
         message_bytes = message_json.encode('utf-8')
 
-        publish_future = publisher.publish(TOPIC_NAME, message_bytes)
-        print(f'Published message ID: {publish_future.result()}')  # 👈 Log this too
+        publisher.publish(TOPIC_NAME, message_bytes)  # 🚫 No .result() or blocking
+
+        print("✅ Message published (non-blocking).")
 
     except Exception as e:
-        print(f'❌ ERROR: {e}')
+        print(f'❌ ERROR publishing message: {e}')
+
