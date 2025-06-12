@@ -3,7 +3,7 @@ import json
 from google.cloud import pubsub_v1
 
 publisher = pubsub_v1.PublisherClient()
-TOPIC_NAME = 'projects/YOUR_PROJECT_ID/topics/file-meta-topic'  # Replace YOUR_PROJECT_ID
+TOPIC_NAME = 'projects/integral-hold-462207-u2/topics/file-meta-topic'  # Replace YOUR_PROJECT_ID
 
 def get_file_metadata(event, context):
     file_data = {
